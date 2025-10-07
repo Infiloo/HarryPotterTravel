@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harry Potter Reiseführer – Fort William & Umgebung</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #0e0e10;
+      color: #f5f5f5;
+    }
+    header {
+      text-align: center;
+      padding: 1rem;
+      background: linear-gradient(135deg, #1e1e22, #343438);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #bfa76f;
+    }
+    #map {
+      height: 90vh;
+      width: 100%;
+      border-top: 2px solid #444;
+    }
+    .leaflet-popup-content {
+      font-size: 0.95rem;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🧙‍♂️ Harry Potter Drehorte – Fort William & Highlands</h1>
+    <p>Interaktive Karte mit echten Filmspots aus den Harry-Potter-Filmen</p>
+  </header>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Karte initialisieren
+    const map = L.map('map').setView([56.8198, -5.1052], 9); // Fort William zentriert
+
+    // OpenStreetMap Layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap-Mitwirkende'
+    }).addTo(map);
+
+    // Marker-Daten
+    const locations = [
+      {
+        name: "Glenfinnan Viaduct",
+        coords: [56.8710, -5.4320],
+        desc: "Das berühmte Viadukt, über das der Hogwarts Express fährt. Bester Aussichtspunkt beim Viaduct View Trail."
+      },
+      {
+        name: "Loch Shiel",
+        coords: [56.8750, -5.4350],
+        desc: "Diente als Kulisse für den 'Black Lake' bei Hogwarts. In der Nähe des Glenfinnan Monuments."
+      },
+      {
+        name: "Loch Eilt / Eilean na Moine",
+        coords: [56.8790, -5.5860],
+        desc: "Dumbledores Grab wurde hier gefilmt. Wunderschöne ruhige Kulisse entlang der A830."
+      },
+      {
+        name: "Steall Falls (Glen Nevis)",
+        coords: [56.7786, -5.0047],
+        desc: "Spektakulärer Wasserfall – Kulisse für Quidditch- und Flugaufnahmen."
+      },
+      {
+        name: "Glencoe (Hagrids Hütte)",
+        coords: [56.6828, -5.1020],
+        desc: "In dieser Umgebung stand Hagrids Hütte während der Dreharbeiten. Wunderschöne Highlands-Kulisse."
+      },
+      {
+        name: "Loch Arkaig",
+        coords: [56.9560, -5.1160],
+        desc: "Wurde im letzten Film als See bei Dumbledores Grab genutzt. Abgelegene, aber magische Gegend."
+      }
+    ];
+
+    // Marker hinzufügen
+    locations.forEach(loc => {
+      L.marker(loc.coords)
+        .addTo(map)
+        .bindPopup(`<b>${loc.name}</b><br>${loc.desc}`);
+    });
+  </script>
+
+</body>
+</html>
